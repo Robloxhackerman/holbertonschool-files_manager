@@ -1,8 +1,10 @@
-import {createClient} from 'redis';
-class RedisClient{
+const redis = require('redis');
+const { promisify } = require('util');
 
+class RedisClient {
   constructor() {
-    this.client = createClient();
+    this.client = redis.createClient();
+
     this.getAsync = promisify(this.client.get).bind(this.client);
 
     this.client.on('error', (error) => {
