@@ -9,3 +9,5 @@ import AppController from '../controllers/AppController';
   paths.get('/status', ((request, response) => AppController.getStatus(request, response)));
   paths.get('/stats', ((request, response) => AppController.getStats(request, response)));
  }
+
+ export default router;
