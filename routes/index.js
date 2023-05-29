@@ -1,4 +1,4 @@
-import AppController from '../controllers/AppController';
+import UserController from '../controllers/UsersController';
 
 const express = require('express');
 
@@ -7,9 +7,9 @@ const router = (app) => {
   app.use(express.json());
   app.use('/', path);
 
-  path.get('/status', ((request, response) => AppController.getStatus(request, response)));
-  path.get('/stats', ((request, response) => AppController.getStats(request, response)));
-  path.post('/users', ((request, response) => AppController.postNew(request, response)));
+  path.get('/status', ((request, response) => UserController.getStatus(request, response)));
+  path.get('/stats', ((request, response) => UserController.getStats(request, response)));
+  path.post('/users', ((request, response) => UserController.postNew(request, response)));
 };
 
 export default router;
