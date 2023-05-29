@@ -1,11 +1,13 @@
-import RedisClient from '../utils/redis';
+const Bull = require('bull');
 import DBClient from '../utils/db';
 import sha1 from "sha1";
 
 class UsersController {
 
   static postNew(request, response) {
+    const userQueue = new Bull('userQueue');
     const email = request.body.email;
+
     if (!email) {
       return response.status(400).send({ error: 'Missing email' });
     }
@@ -22,6 +24,10 @@ class UsersController {
 
     const userPassword = sha1(password);
     const result = DBClient.db.collection('users').insertOne({ email: email, password: userPassword });
+
+    userQueue.add({
+      userId: result.insertedId,
+    });
 
     return response.status(201).send({ id: result.insertedId, email: email });
   }
