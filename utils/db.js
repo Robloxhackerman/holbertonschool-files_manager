@@ -7,12 +7,9 @@ const DB_DATABASE = process.env.DB_DATABASE || 'files_manager';
 class DBClient {
   constructor() {
     MongoClient.connect(`mongodb://${DB_HOST}:${DB_PORT}`, (err, client) => {
-      if (!error) {
+      if (!err) {
         this.db = client.db(DB_DATABASE);
-        this.users = this.db.collection('users');
-        this.files = this.db.collection('files');
       } else {
-        console.log(error.message);
         this.db = false;
       }
     });
@@ -20,19 +17,17 @@ class DBClient {
 
   isAlive() {
     return !!this.db;
+
   }
 
   async nbUsers() {
-    const userCount = this.users.countDocuments();
-    return userCount;
+    return this.db.collection('users').countDocuments();
   }
 
   async nbFiles() {
-    const fileCount = this.files.countDocuments();
-    return fileCount;
+    return this.db.collection('files').countDocuments();
   }
 }
 
 const dbClient = new DBClient();
-
 export default dbClient;
