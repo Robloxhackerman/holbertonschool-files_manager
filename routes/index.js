@@ -1,4 +1,6 @@
 import UsersController from '../controllers/UsersController';
+import AuthController from '../controllers/AuthController';
+import AppController from '../controllers/AppController';
 
 const express = require('express');
 
@@ -7,8 +9,8 @@ const router = (app) => {
   app.use(express.json());
   app.use('/', path);
 
-  path.get('/status', ((request, response) => UsersController.getStatus(request, response)));
-  path.get('/stats', ((request, response) => UsersController.getStats(request, response)));
+  path.get('/status', ((request, response) => AppController.getStatus(request, response)));
+  path.get('/stats', ((request, response) => AppController.getStats(request, response)));
 
   path.post('/users', ((request, response) => UsersController.postNew(request, response)));
 
