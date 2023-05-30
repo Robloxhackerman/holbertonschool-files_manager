@@ -16,6 +16,7 @@ const router = (app) => {
 
   path.get('/connect', ((request, response) => AuthController.getConnect(request, response)));
   path.get('/disconnect', ((request, response) => AuthController.getDisconnect(request, response)));
+  path.get('/users/me', ((request, response) => UsersController.getMe(request, response)));
 };
 
 export default router;
