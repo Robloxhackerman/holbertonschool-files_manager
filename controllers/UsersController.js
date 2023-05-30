@@ -1,6 +1,6 @@
 import sha1 from 'sha1';
+import { redisClient } from 'redis';
 import DBClient from '../utils/db';
-import {redisClient} from "redis";
 
 const Bull = require('bull');
 const { ObjectId } = require('mongodb');
