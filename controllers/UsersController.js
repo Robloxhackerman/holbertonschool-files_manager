@@ -3,6 +3,7 @@ import DBClient from '../utils/db';
 import {RedisClient} from "redis";
 
 const Bull = require('bull');
+const { ObjectId } = require('mongodb');
 
 class UsersController {
   static async postNew(request, response) {
